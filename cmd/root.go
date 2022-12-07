@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/spf13/cobra"
 	"log"
-	"mia/internal/mia"
 	"mia/internal/mia/sources"
 	"os"
 
@@ -20,7 +19,12 @@ var rootCmd = &cobra.Command{
 	Long: `Mia is a tool that lets you easily download and watch releases of a multitude of media content
 Once configured, simply use 'mia'
 You can also use 'mia watch' to ask mia to mia periodically`,
-	Run: func(cmd *cobra.Command, args []string) { mia.Run() },
+	Run: func(cmd *cobra.Command, args []string) {
+		err := cmd.Help()
+		if err != nil {
+			log.Fatalf("error printing help: %w", err)
+		}
+	},
 }
 
 func Execute() {
