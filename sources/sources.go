@@ -7,7 +7,7 @@ import (
 )
 
 var SupportedSources = []string{
-	"nyaan",
+	"nyaa",
 	"piratebay",
 }
 

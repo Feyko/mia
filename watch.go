@@ -1,4 +1,4 @@
-package mia
+package main
 
 import (
 	"fmt"
@@ -18,7 +18,7 @@ func ScheduleCron(schedule string) {
 	home, _ := homedir.Dir()
 	cronfilePath := home + "/.mia.cron"
 
-	f, err := os.OpenFile( cronfilePath, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0664)
+	f, err := os.OpenFile(cronfilePath, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0664)
 	if err != nil {
 		log.Fatalf("Failed to open cron file: %v", err)
 	}

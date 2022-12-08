@@ -3,7 +3,7 @@ package cmd
 import (
 	"github.com/spf13/cobra"
 	"log"
-	"mia/internal/mia/sources"
+	"mia/sources"
 )
 
 var sourceEnableCmd = &cobra.Command{

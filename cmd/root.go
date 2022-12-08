@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/spf13/cobra"
 	"log"
-	"mia/internal/mia/sources"
+	"mia/sources"
 	"os"
 
 	homedir "github.com/mitchellh/go-homedir"

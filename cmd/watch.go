@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-	"mia/internal/mia"
+	"mia"
 )
 
 var watchCmd = &cobra.Command{
@@ -19,5 +19,5 @@ func init() {
 
 func run(cmd *cobra.Command, args []string) {
 	interval, _ := cmd.Flags().GetInt("interval")
-	mia.Watch(interval)
+	main.Watch(interval)
 }
