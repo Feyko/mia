@@ -4,23 +4,48 @@ import (
 	"github.com/pkg/errors"
 	"github.com/spf13/viper"
 	"golang.org/x/exp/slices"
+	"io"
+	"strings"
 )
 
-var SupportedSources = []string{
-	"nyaa",
-	"piratebay",
+type Source interface {
+	Name() string
+	Search(match string) (bool, error)
+	Download(match string) (io.ReadCloser, error)
+}
+
+var SupportedSources = map[string]Source{
+	"nyaa":         &Nyaa{},
+	"thepiratebay": &ThePirateBay{},
+}
+
+func List() []Source {
+	enabledSrcs := viper.GetStringSlice("enabledSources")
+	var sources []Source
+	for _, src := range enabledSrcs {
+		source, ok := SupportedSources[src]
+		if ok {
+			sources = append(sources, source)
+		}
+	}
+	return sources
 }
 
 func FormattedList() (output string) {
 	output += "List of the sources currently supported:\n"
 	for _, source := range SupportedSources {
-		output += ("-" + source + "\n")
+		output += ("-" + source.Name() + "\n")
 	}
 	return
 }
 
 func IsSupported(src string) bool {
-	return slices.Contains(SupportedSources, src)
+	for name, _ := range SupportedSources {
+		if strings.ToLower(src) == name {
+			return true
+		}
+	}
+	return false
 }
 
 func IsEnabled(src string) bool {

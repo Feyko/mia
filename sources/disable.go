@@ -7,7 +7,7 @@ import (
 func Disable(src string) error {
 	if src == "all" {
 		for _, source := range SupportedSources {
-			err := Disable(source)
+			err := Disable(source.Name())
 			if err != nil {
 				return err
 			}

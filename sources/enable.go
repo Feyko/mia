@@ -7,7 +7,7 @@ import (
 func Enable(src string) error {
 	if src == "all" {
 		for _, source := range SupportedSources {
-			err := Enable(source)
+			err := Enable(source.Name())
 			if err != nil {
 				return err
 			}
